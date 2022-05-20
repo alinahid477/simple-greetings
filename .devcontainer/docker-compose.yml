@@ -1,0 +1,29 @@
+version: "3"
+
+services:
+  
+  simplegreetings:
+    container_name: simple-greetings
+    build:
+      context: .
+      dockerfile: ./Dockerfile.devcontainer
+    volumes:
+      - ../:/workspace:cached
+    environment:
+      GREETING_TEXT: Hello from anahid !!
+    command: sleep infinity
+    networks: 
+      simplegreetings:
+        ipv4_address: 172.22.0.2
+    ports:
+      - 8080:8080
+    restart: unless-stopped
+    stdin_open: true
+
+networks:
+  simplegreetings:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.22.0.0/16
+        
