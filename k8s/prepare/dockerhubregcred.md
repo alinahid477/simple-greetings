@@ -1,0 +1,1 @@
+kubectl create secret docker-registry dockerhubregkey --docker-server=https://index.docker.io/v2/ --docker-username=accordingtoali --docker-password=xxxxx --docker-email=ali@gmail.com --namespace custom

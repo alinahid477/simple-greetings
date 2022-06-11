@@ -1,0 +1,50 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: simple-greetings
+spec:
+  selector:
+    matchLabels: 
+      app: simple-greetings
+  template:
+    metadata:
+      labels: 
+        app: simple-greetings
+    spec:
+      volumes:
+      - name: ephemeral
+        emptyDir: {}
+      imagePullSecrets:
+      - name: dockerhubregkey
+      containers:
+      - name: simple-greetings
+        image: docker.io/accordingtoali/simple-greetings:latest
+        ports:
+        - containerPort: 8080
+        imagePullPolicy: Always
+        resources:
+          requests:
+            memory: "200Mi"
+            cpu: "500m"
+          limits:
+            memory: "300Mi"
+            cpu: "1000m"
+        volumeMounts:
+        - name: ephemeral
+          mountPath: "/tmp"
+        env:
+        - name: GREETING_TEXT
+          value: hello from manually deployed
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: simple-greetings
+spec:
+  ports:
+  - port: 80
+    targetPort: 8080
+  selector: 
+    app: simple-greetings
+  type: LoadBalancer
