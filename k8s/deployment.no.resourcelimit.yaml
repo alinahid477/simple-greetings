@@ -15,7 +15,7 @@ spec:
       serviceAccountName: custom-sa
       containers:
       - name: simple-greetings
-        image: docker.io/accordingtoali/simple-greetings:latest
+        image: docker.io/accordingtoali/simple-greetings:latest # anahidtapregistry.azurecr.io/simple-greetings:latest
         ports:
         - containerPort: 8080
         imagePullPolicy: Always
