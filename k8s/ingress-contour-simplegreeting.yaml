@@ -1,0 +1,22 @@
+apiVersion: projectcontour.io/v1
+kind: HTTPProxy
+metadata:
+  name: contour-ingress-simplegreetings
+spec:
+  virtualhost:
+    fqdn: calculator.192.168.xxx.xx.nip.io #calculator.lb.corp.tanzu #calculator.corp.tanzu
+  routes:
+    - services:
+      - name: greetings
+        port: 80
+      conditions:
+      - prefix: /api/greetings/do  # matches `multi-path.bar.com/blog` or `multi-path.bar.com/blog/*`
+      pathRewritePolicy:
+        replacePrefix:
+        - prefix: /api/greetings/do
+          replacement: /
+    - services:
+      - name: home
+        port: 80
+      conditions:
+        - prefix: /  # matches everything else
