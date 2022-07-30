@@ -33,6 +33,6 @@ public class GreetingsController {
     @GetMapping("/do")
     public GreetingResponseObject greeting() {
         logger.info("Inside greeting..");
-        return new GreetingResponseObject(this.appProperties.getGreetingText());
+        return new GreetingResponseObject(this.appProperties.getGreetingText()+" 2022");
     } 
 }
