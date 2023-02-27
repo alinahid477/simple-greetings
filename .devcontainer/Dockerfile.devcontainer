@@ -4,4 +4,4 @@ RUN java --version
 
 RUN apt-get update && apt-get install git -y
 
-# CMD [ "/bin/bash" ]
+CMD [ "/bin/bash" ]
