@@ -1,5 +1,10 @@
 package local.simplegreetings.Controllers.api;
 
+import java.util.LinkedList;
+import java.util.List;
+import java.util.function.IntUnaryOperator;
+import java.util.stream.IntStream;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,5 +39,16 @@ public class GreetingsController {
     public GreetingResponseObject greeting() {
         logger.info("Inside greeting..");
         return new GreetingResponseObject(this.appProperties.getGreetingText()+" 2022");
+    } 
+
+    @GetMapping("/heavy")
+    public GreetingResponseObject heavy() {
+        logger.info("Inside heavy..");
+        List<Integer> list = IntStream.range(0, 10000000).parallel().map(IntUnaryOperator.identity()).collect(LinkedList::new, List::add, List::addAll);
+        long start = System.nanoTime();
+        int value = list.get(9500000);
+        long end = System.nanoTime() - start;
+        String outputText = String.format("Found value %d in %d nanos\n", value, end);
+        return new GreetingResponseObject(outputText);
     } 
 }
