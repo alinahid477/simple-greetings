@@ -3,6 +3,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: simple-greetings
+  namespace: myapps1
 spec:
   selector:
     matchLabels: 
@@ -12,10 +13,12 @@ spec:
       labels: 
         app: simple-greetings
     spec:
-      serviceAccountName: custom-sa
+      #serviceAccountName: custom-sa
+      imagePullSecrets:
+      - name: rh-ee-anahid-sarobot-pull-secret
       containers:
       - name: simple-greetings
-        image: docker.io/accordingtoali/simple-greetings:latest # anahidtapregistry.azurecr.io/simple-greetings:latest
+        image: quay.io/rh-ee-anahid/simple-greetings:1.0.0 # anahidtapregistry.azurecr.io/simple-greetings:latest
         ports:
         - containerPort: 8080
         imagePullPolicy: Always
@@ -27,6 +30,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: simple-greetings
+  namespace: myapps1
 spec:
   ports:
   - port: 80
