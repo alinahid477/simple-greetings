@@ -1,0 +1,40 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: simple-greetings2
+  namespace: myapps1
+spec:
+  selector:
+    matchLabels: 
+      app: simple-greetings2
+  template:
+    metadata:
+      labels: 
+        app: simple-greetings2
+    spec:
+      #serviceAccountName: custom-sa
+      imagePullSecrets:
+      - name: mini-quay-secret
+      containers:
+      - name: simple-greetings2
+        image: miniquay-on-rhel.metalsno.home.alishomelab.site:8443/vmimages/simple-greetings:1.0.0 # anahidtapregistry.azurecr.io/simple-greetings:latest
+        ports:
+        - containerPort: 8080
+        imagePullPolicy: Always
+        env:
+        - name: GREETING_TEXT
+          value: hello from manually deployed
+# ---
+# apiVersion: v1
+# kind: Service
+# metadata:
+#   name: simple-greetings
+#   namespace: myapps1
+# spec:
+#   ports:
+#   - port: 80
+#     targetPort: 8080
+#   selector: 
+#     app: simple-greetings
+#   type: LoadBalancer
