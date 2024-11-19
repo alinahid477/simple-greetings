@@ -1,5 +1,6 @@
 package local.simplegreetings.Controllers.api;
 
+import java.util.Calendar;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.function.IntUnaryOperator;
@@ -38,7 +39,8 @@ public class GreetingsController {
     @GetMapping("/do")
     public GreetingResponseObject greeting() {
         logger.info("Inside greeting..");
-        return new GreetingResponseObject(this.appProperties.getGreetingText()+" 2022");
+        int year = Calendar.getInstance().get(Calendar.YEAR);
+        return new GreetingResponseObject(this.appProperties.getGreetingText()+" "+year);
     } 
 
     @GetMapping("/heavy")
