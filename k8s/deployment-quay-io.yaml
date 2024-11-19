@@ -2,22 +2,22 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: simple-greetings2
+  name: simple-greetings
   namespace: myapps1
 spec:
   selector:
     matchLabels: 
-      app: simple-greetings2
+      app: simple-greetings
   template:
     metadata:
       labels: 
-        app: simple-greetings2
+        app: simple-greetings
     spec:
       #serviceAccountName: custom-sa
-      imagePullSecrets:
-      - name: mini-quay-secret
+      # imagePullSecrets:
+      # - name: my-quay-credential
       containers:
-      - name: simple-greetings2
+      - name: simple-greetings
         image: quay.io/alitestseverything/simple-greetings:1.0.0
         ports:
         - containerPort: 8080
@@ -30,7 +30,7 @@ spec:
 # kind: Service
 # metadata:
 #   name: simple-greetings
-#   namespace: myapps1
+#   namespace: anahid
 # spec:
 #   ports:
 #   - port: 80
