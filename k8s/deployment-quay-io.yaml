@@ -18,7 +18,7 @@ spec:
       - name: mini-quay-secret
       containers:
       - name: simple-greetings2
-        image: quay.io/alitestseverything/simple-greetings:1.0.0 # anahidtapregistry.azurecr.io/simple-greetings:latest
+        image: quay.io/alitestseverything/simple-greetings:1.0.0
         ports:
         - containerPort: 8080
         imagePullPolicy: Always

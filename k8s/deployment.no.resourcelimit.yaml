@@ -18,7 +18,7 @@ spec:
       - name: rh-ee-anahid-sarobot-pull-secret
       containers:
       - name: simple-greetings
-        image: quay.io/rh-ee-anahid/simple-greetings:1.0.0 # anahidtapregistry.azurecr.io/simple-greetings:latest
+        image: quay.io/rh-ee-anahid/simple-greetings:1.0.0
         ports:
         - containerPort: 8080
         imagePullPolicy: Always

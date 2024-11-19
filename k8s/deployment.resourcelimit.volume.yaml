@@ -19,7 +19,7 @@ spec:
       - name: dockerhubregkey
       containers:
       - name: simple-greetings
-        image: docker.io/accordingtoali/simple-greetings:latest # anahidtapregistry.azurecr.io/simple-greetings:latest
+        image: docker.io/accordingtoali/simple-greetings:latest
         ports:
         - containerPort: 8080
         imagePullPolicy: Always
