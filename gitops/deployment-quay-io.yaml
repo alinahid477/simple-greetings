@@ -2,21 +2,21 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: simple-greetings-user1
+  name: simple-greetings-byargo
   namespace: user1
 spec:
   selector:
     matchLabels:
-      app: simple-greetings-user1
+      app: simple-greetings-byargo
   template:
     metadata:
       labels:
-        app: simple-greetings-user1
+        app: simple-greetings-byargo
     spec:
       imagePullSecrets:
       - name: alitestseverything-quay-secret
       containers:
-      - name: simple-greetings-user1
+      - name: simple-greetings-byargo
         image: quay.io/alitestseverything/simple-greetings:2.0.0
         ports:
         - containerPort: 8080
